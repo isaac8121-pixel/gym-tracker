@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GYM TRACKER</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0b0d10;
+      color: white;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 500px;
+      margin: auto;
+      padding: 25px 18px 100px;
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: #39ff88;
+    }
+
+    .card {
+      background: #15181d;
+      border: 1px solid #252a31;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .label {
+      color: #888;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .weight {
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .weight small {
+      font-size: 18px;
+      color: #888;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .stat {
+      background: #15181d;
+      border: 1px solid #252a31;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .stat span {
+      display: block;
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .stat strong {
+      font-size: 25px;
+    }
+
+    .green {
+      color: #39ff88;
+    }
+
+    h2 {
+      margin: 25px 0 12px;
+      font-size: 21px;
+    }
+
+    .workout {
+      background: #15181d;
+      border-radius: 16px;
+      padding: 18px;
+      border-left: 4px solid #39ff88;
+    }
+
+    .workout h3 {
+      margin-bottom: 8px;
+    }
+
+    .workout p {
+      color: #999;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: bold;
+      background: #1d2229;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(.97);
+    }
+
+    .primary {
+      background: #39ff88;
+      color: #07100b;
+    }
+
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #111419;
+      border-top: 1px solid #252a31;
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      padding: 13px;
+    }
+
+    .bottom button {
+      background: transparent;
+      padding: 5px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    .bottom button.active {
+      color: #39ff88;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .exercise {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #252a31;
+    }
+
+    .exercise:last-child {
+      border-bottom: none;
+    }
+
+    .exercise span {
+      color: #888;
+      font-size: 13px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    .check {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border-radius: 50%;
+    }
+
+    .done {
+      background: #39ff88;
+      color: #07100b;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- INICIO -->
+  <section id="inicio" class="screen active">
+
+    <div class="logo">GYM TRACKER</div>
+    <h1>Modo <span>Hierro</span></h1>
+
+    <div class="card">
+      <div class="label">Peso actual</div>
+      <div class="weight">
+        <span id="peso">75.0</span>
+        <small>kg</small>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <div class="stat">
+        <span>Entrenos</span>
+        <strong id="entrenos">0</strong>
+      </div>
+
+      <div class="stat">
+        <span>Racha</span>
+        <strong class="green">🔥 <span id="racha">0</span></strong>
+      </div>
+
+    </div>
+
+    <h2>Entrenamiento de hoy</h2>
+
+    <div class="workout">
+      <h3>💪 Pecho + Tríceps</h3>
+      <p>
+        Press banca<br>
+        Press inclinado<br>
+        Aperturas<br>
+        Fondos<br>
+        Tríceps en polea
+      </p>
+    </div>
+
+    <div class="buttons">
+      <button class="primary" onclick="ir('rutina')">
+        🏋️ Rutina
+      </button>
+
+      <button onclick="ir('progreso')">
+        📈 Progreso
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- RUTINA -->
+  <section id="rutina" class="screen">
+
+    <div class="logo">ENTRENAMIENTO</div>
+    <h1>Tu <span>Rutina</span></h1>
+
+    <div class="card">
+
+      <div class="exercise">
+        <div>
+          <b>Press banca</b>
+          <span>4 series × 8-10 reps</span>
+        </div>
+        <button class="check" onclick="terminar(this)">✓</button>
+      </div>
+
+      <div class="exercise">
+        <div>
+          <b>Press inclinado</b>
+          <span>3 series × 10 reps</span>
+        </div>
+        <button class="check" onclick="terminar(this)">✓</button>
+      </div>
+
+      <div class="exercise">
+        <div>
+          <b>Aperturas</b>
+          <span>3 series × 12 reps</span>
+        </div>
+        <button class="check" onclick="terminar(this)">✓</button>
+      </div>
+
+      <div class="exercise">
+        <div>
+          <b>Fondos</b>
+          <span>3 series × 8-12 reps</span>
+        </div>
+        <button class="check" onclick="terminar(this)">✓</button>
+      </div>
+
+      <div class="exercise">
+        <div>
+          <b>Tríceps en polea</b>
+          <span>3 series × 12 reps</span>
+        </div>
+        <button class="check" onclick="terminar(this)">✓</button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMIDAS -->
+  <section id="comidas" class="screen">
+
+    <div class="logo">NUTRICIÓN</div>
+    <h1>Tus <span>Comidas</span></h1>
+
+    <div class="grid">
+
+      <div class="stat">
+        <span>Proteína</span>
+        <strong class="green">0 g</strong>
+      </div>
+
+      <div class="stat">
+        <span>Calorías</span>
+        <strong>0</strong>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="exercise">
+        <div>
+          <b>🍳 Desayuno</b>
+          <span>Agrega tu comida</span>
+        </div>
+        <button onclick="alert('Próximamente: agregar comida')">+</button>
+      </div>
+
+      <div class="exercise">
+        <div>
+          <b>🍗 Comida</b>
+          <span>Agrega tu comida</span>
+        </div>
+        <button onclick="alert('Próximamente: agregar comida')">+</button>
+      </div>
+
+      <div class="exercise">
+        <div>
+          <b>🥗 Cena</b>
+          <span>Agrega tu comida</span>
+        </div>
+        <button onclick="alert('Próximamente: agregar comida')">+</button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROGRESO -->
+  <section id="progreso" class="screen">
+
+    <div class="logo">EVOLUCIÓN</div>
+    <h1>Mi <span>Progreso</span></h1>
+
+    <div class="card">
+
+      <div class="label">Actualizar peso</div>
+
+      <input
+        id="nuevoPeso"
+        type="number"
+        step="0.1"
+        placeholder="Ej. 74.5"
+        style="
+          width:100%;
+          padding:15px;
+          border-radius:12px;
+          border:1px solid #333;
+          background:#0b0d10;
+          color:white;
+          font-size:18px;
+          margin:10px 0;
+        "
+      >
+
+      <button class="primary" style="width:100%" onclick="guardarPeso()">
+        Guardar peso
+      </button>
+
+    </div>
+
+    <div class="card">
+      <div class="label">Objetivo</div>
+      <h2 style="margin-top:5px">
+        Definición + músculo
+      </h2>
+      <p style="color:#888;margin-top:8px">
+        Aquí vamos a ir construyendo tu historial.
+      </p>
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- NAVEGACIÓN -->
+
+<nav class="bottom">
+
+  <button class="active" onclick="ir('inicio', this)">
+    🏠<br>Inicio
+  </button>
+
+  <button onclick="ir('rutina', this)">
+    🏋️<br>Rutina
+  </button>
+
+  <button onclick="ir('comidas', this)">
+    🍗<br>Comidas
+  </button>
+
+  <button onclick="ir('progreso', this)">
+    📈<br>Progreso
+  </button>
+
+</nav>
+
+
+<script>
+
+function ir(id, boton) {
+
+  document.querySelectorAll('.screen')
+    .forEach(s => s.classList.remove('active'));
+
+  document.getElementById(id)
+    .classList.add('active');
+
+  document.querySelectorAll('.bottom button')
+    .forEach(b => b.classList.remove('active'));
+
+  if (boton) {
+    boton.classList.add('active');
+  }
+}
+
+
+function terminar(boton) {
+
+  boton.classList.toggle('done');
+
+  if (boton.classList.contains('done')) {
+
+    let entrenos =
+      Number(localStorage.getItem('entrenos') || 0);
+
+    localStorage.setItem(
+      'entrenos',
+      entrenos + 1
+    );
+
+    actualizar();
+
+  }
+}
+
+
+function guardarPeso() {
+
+  const input =
+    document.getElementById('nuevoPeso');
+
+  if (!input.value) return;
+
+  localStorage.setItem(
+    'peso',
+    input.value
+  );
+
+  actualizar();
+
+  input.value = '';
+
+  alert('Peso guardado 💪');
+}
+
+
+function actualizar() {
+
+  const peso =
+    localStorage.getItem('peso') || '75.0';
+
+  const entrenos =
+    localStorage.getItem('entrenos') || '0';
+
+  document.getElementById('peso')
+    .textContent = peso;
+
+  document.getElementById('entrenos')
+    .textContent = entrenos;
+
+}
+
+
+actualizar();
+
+</script>
+
+</body>
+</html>
