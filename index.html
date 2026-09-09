@@ -1,526 +1,1395 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GYM TRACKER</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d10">
+<title>GYM TRACKER</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      background: #0b0d10;
-      color: white;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-    }
+body{
+  background:#0b0d10;
+  color:white;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  min-height:100vh;
+}
 
-    .app {
-      max-width: 500px;
-      margin: auto;
-      padding: 25px 18px 100px;
-    }
+.app{
+  max-width:520px;
+  margin:auto;
+  padding:24px 18px 110px;
+}
 
-    .logo {
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      color: #888;
-      margin-bottom: 8px;
-    }
+.logo{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:3px;
+  color:#777;
+  margin-bottom:8px;
+}
 
-    h1 {
-      font-size: 34px;
-      margin-bottom: 25px;
-    }
+h1{
+  font-size:38px;
+  margin-bottom:24px;
+}
 
-    h1 span {
-      color: #39ff88;
-    }
+h1 span{
+  color:#39ff88;
+}
 
-    .card {
-      background: #15181d;
-      border: 1px solid #252a31;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
+h2{
+  font-size:23px;
+  margin:25px 0 14px;
+}
 
-    .label {
-      color: #888;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
+.card{
+  background:#15181d;
+  border:1px solid #272c34;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:15px;
+}
 
-    .weight {
-      font-size: 48px;
-      font-weight: bold;
-    }
+.label{
+  color:#888;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-bottom:8px;
+}
 
-    .weight small {
-      font-size: 18px;
-      color: #888;
-    }
+.weight{
+  font-size:52px;
+  font-weight:800;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 15px;
-    }
+.weight small{
+  font-size:18px;
+  color:#888;
+}
 
-    .stat {
-      background: #15181d;
-      border: 1px solid #252a31;
-      border-radius: 16px;
-      padding: 18px;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:15px;
+}
 
-    .stat span {
-      display: block;
-      color: #888;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
+.stat{
+  background:#15181d;
+  border:1px solid #272c34;
+  border-radius:18px;
+  padding:18px;
+}
 
-    .stat strong {
-      font-size: 25px;
-    }
+.stat span{
+  display:block;
+  color:#888;
+  font-size:13px;
+  margin-bottom:9px;
+}
 
-    .green {
-      color: #39ff88;
-    }
+.stat strong{
+  font-size:27px;
+}
 
-    h2 {
-      margin: 25px 0 12px;
-      font-size: 21px;
-    }
+.green{
+  color:#39ff88;
+}
 
-    .workout {
-      background: #15181d;
-      border-radius: 16px;
-      padding: 18px;
-      border-left: 4px solid #39ff88;
-    }
+.workout{
+  background:#15181d;
+  border-radius:18px;
+  padding:19px;
+  border-left:4px solid #39ff88;
+}
 
-    .workout h3 {
-      margin-bottom: 8px;
-    }
+.workout h3{
+  font-size:20px;
+  margin-bottom:10px;
+}
 
-    .workout p {
-      color: #999;
-      font-size: 14px;
-      line-height: 1.5;
-    }
+.workout p{
+  color:#999;
+  line-height:1.65;
+}
 
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 15px;
-    }
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:15px;
+}
 
-    button {
-      border: none;
-      border-radius: 14px;
-      padding: 16px;
-      font-size: 15px;
-      font-weight: bold;
-      background: #1d2229;
-      color: white;
-      cursor: pointer;
-    }
+button{
+  border:0;
+  border-radius:15px;
+  padding:15px;
+  font-size:15px;
+  font-weight:750;
+  background:#1d2229;
+  color:white;
+  cursor:pointer;
+}
 
-    button:active {
-      transform: scale(.97);
-    }
+button:active{
+  transform:scale(.97);
+}
 
-    .primary {
-      background: #39ff88;
-      color: #07100b;
-    }
+.primary{
+  background:#39ff88;
+  color:#07100b;
+}
 
-    .bottom {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #111419;
-      border-top: 1px solid #252a31;
-      display: flex;
-      justify-content: center;
-      gap: 35px;
-      padding: 13px;
-    }
+.screen{
+  display:none;
+}
 
-    .bottom button {
-      background: transparent;
-      padding: 5px;
-      color: #888;
-      font-size: 12px;
-    }
+.screen.active{
+  display:block;
+}
 
-    .bottom button.active {
-      color: #39ff88;
-    }
+/* DAYS */
 
-    .screen {
-      display: none;
-    }
+.days{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  margin-bottom:15px;
+}
 
-    .screen.active {
-      display: block;
-    }
+.day{
+  min-width:72px;
+  padding:12px 8px;
+  background:#15181d;
+  border:1px solid #292e35;
+}
 
-    .exercise {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0;
-      border-bottom: 1px solid #252a31;
-    }
+.day.active{
+  background:#39ff88;
+  color:#07100b;
+}
 
-    .exercise:last-child {
-      border-bottom: none;
-    }
+/* EXERCISES */
 
-    .exercise span {
-      color: #888;
-      font-size: 13px;
-      display: block;
-      margin-top: 5px;
-    }
+.exercise{
+  padding:17px 0;
+  border-bottom:1px solid #272c34;
+}
 
-    .check {
-      width: 42px;
-      height: 42px;
-      padding: 0;
-      border-radius: 50%;
-    }
+.exercise:last-child{
+  border-bottom:0;
+}
 
-    .done {
-      background: #39ff88;
-      color: #07100b;
-    }
-  </style>
+.exercise-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.exercise-title b{
+  font-size:16px;
+}
+
+.target{
+  color:#888;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.sets{
+  display:grid;
+  gap:8px;
+}
+
+.set{
+  display:grid;
+  grid-template-columns:35px 1fr 1fr 44px;
+  gap:7px;
+  align-items:center;
+}
+
+.set-number{
+  color:#777;
+  font-size:12px;
+  text-align:center;
+}
+
+input{
+  width:100%;
+  padding:11px;
+  border-radius:11px;
+  border:1px solid #333941;
+  background:#0b0d10;
+  color:white;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#39ff88;
+}
+
+.check{
+  width:44px;
+  height:42px;
+  padding:0;
+  border-radius:12px;
+}
+
+.check.done{
+  background:#39ff88;
+  color:#07100b;
+}
+
+/* TIMER */
+
+.timer{
+  text-align:center;
+}
+
+.timer-display{
+  font-size:65px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin:12px 0 18px;
+}
+
+.timer-buttons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.timer-buttons button{
+  padding:12px 5px;
+}
+
+/* FOOD */
+
+.food-item{
+  display:grid;
+  grid-template-columns:1fr 70px 70px 42px;
+  gap:7px;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid #272c34;
+}
+
+.food-item:last-child{
+  border-bottom:0;
+}
+
+.food-name{
+  font-weight:650;
+}
+
+.food-info{
+  color:#888;
+  font-size:11px;
+  text-align:center;
+}
+
+/* PROGRESS */
+
+.history{
+  display:grid;
+  gap:8px;
+}
+
+.history-item{
+  display:flex;
+  justify-content:space-between;
+  background:#101318;
+  padding:13px;
+  border-radius:12px;
+}
+
+.progress-bar{
+  height:10px;
+  background:#242931;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:#39ff88;
+  transition:.3s;
+}
+
+/* NAV */
+
+.bottom{
+  position:fixed;
+  z-index:10;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#111419;
+  border-top:1px solid #272c34;
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  padding:10px 8px calc(10px + env(safe-area-inset-bottom));
+}
+
+.bottom button{
+  background:transparent;
+  padding:5px;
+  color:#777;
+  font-size:11px;
+  min-width:65px;
+}
+
+.bottom button.active{
+  color:#39ff88;
+}
+
+.empty{
+  color:#777;
+  text-align:center;
+  padding:20px 0;
+}
+
+.finish{
+  width:100%;
+  margin-top:15px;
+}
+
+.small-note{
+  color:#777;
+  font-size:12px;
+  line-height:1.5;
+  margin-top:8px;
+}
+
+@media(max-width:380px){
+  .set{
+    grid-template-columns:28px 1fr 1fr 40px;
+  }
+
+  .bottom{
+    gap:10px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <!-- INICIO -->
-  <section id="inicio" class="screen active">
+<!-- ================= INICIO ================= -->
 
-    <div class="logo">GYM TRACKER</div>
-    <h1>Modo <span>Hierro</span></h1>
+<section id="inicio" class="screen active">
 
-    <div class="card">
-      <div class="label">Peso actual</div>
-      <div class="weight">
-        <span id="peso">75.0</span>
-        <small>kg</small>
-      </div>
-    </div>
+<div class="logo">GYM TRACKER</div>
+<h1>Modo <span>Hierro</span></h1>
 
-    <div class="grid">
+<div class="card">
+<div class="label">Peso actual</div>
+<div class="weight">
+<span id="peso">75.0</span>
+<small>kg</small>
+</div>
+</div>
 
-      <div class="stat">
-        <span>Entrenos</span>
-        <strong id="entrenos">0</strong>
-      </div>
+<div class="grid">
 
-      <div class="stat">
-        <span>Racha</span>
-        <strong class="green">🔥 <span id="racha">0</span></strong>
-      </div>
+<div class="stat">
+<span>Entrenos</span>
+<strong id="entrenos">0</strong>
+</div>
 
-    </div>
+<div class="stat">
+<span>Racha</span>
+<strong class="green">🔥 <span id="racha">0</span></strong>
+</div>
 
-    <h2>Entrenamiento de hoy</h2>
+</div>
 
-    <div class="workout">
-      <h3>💪 Pecho + Tríceps</h3>
-      <p>
-        Press banca<br>
-        Press inclinado<br>
-        Aperturas<br>
-        Fondos<br>
-        Tríceps en polea
-      </p>
-    </div>
+<h2>Entrenamiento de hoy</h2>
 
-    <div class="buttons">
-      <button class="primary" onclick="ir('rutina')">
-        🏋️ Rutina
-      </button>
+<div class="workout">
+<h3 id="homeWorkout">💪 Pecho + Tríceps</h3>
+<p id="homeExercises"></p>
+</div>
 
-      <button onclick="ir('progreso')">
-        📈 Progreso
-      </button>
-    </div>
+<div class="buttons">
+<button class="primary" onclick="ir('rutina')">
+🏋️ Rutina
+</button>
 
-  </section>
+<button onclick="ir('progreso')">
+📈 Progreso
+</button>
+</div>
+
+</section>
 
 
-  <!-- RUTINA -->
-  <section id="rutina" class="screen">
+<!-- ================= RUTINA ================= -->
 
-    <div class="logo">ENTRENAMIENTO</div>
-    <h1>Tu <span>Rutina</span></h1>
+<section id="rutina" class="screen">
 
-    <div class="card">
+<div class="logo">ENTRENAMIENTO</div>
+<h1>Tu <span>Rutina</span></h1>
 
-      <div class="exercise">
-        <div>
-          <b>Press banca</b>
-          <span>4 series × 8-10 reps</span>
-        </div>
-        <button class="check" onclick="terminar(this)">✓</button>
-      </div>
+<div class="days">
 
-      <div class="exercise">
-        <div>
-          <b>Press inclinado</b>
-          <span>3 series × 10 reps</span>
-        </div>
-        <button class="check" onclick="terminar(this)">✓</button>
-      </div>
+<button class="day active" onclick="cambiarDia('lunes',this)">
+LUN
+</button>
 
-      <div class="exercise">
-        <div>
-          <b>Aperturas</b>
-          <span>3 series × 12 reps</span>
-        </div>
-        <button class="check" onclick="terminar(this)">✓</button>
-      </div>
+<button class="day" onclick="cambiarDia('martes',this)">
+MAR
+</button>
 
-      <div class="exercise">
-        <div>
-          <b>Fondos</b>
-          <span>3 series × 8-12 reps</span>
-        </div>
-        <button class="check" onclick="terminar(this)">✓</button>
-      </div>
+<button class="day" onclick="cambiarDia('miercoles',this)">
+MIÉ
+</button>
 
-      <div class="exercise">
-        <div>
-          <b>Tríceps en polea</b>
-          <span>3 series × 12 reps</span>
-        </div>
-        <button class="check" onclick="terminar(this)">✓</button>
-      </div>
+<button class="day" onclick="cambiarDia('jueves',this)">
+JUE
+</button>
 
-    </div>
+<button class="day" onclick="cambiarDia('viernes',this)">
+VIE
+</button>
 
-  </section>
+</div>
 
+<div class="card">
 
-  <!-- COMIDAS -->
-  <section id="comidas" class="screen">
+<h2 id="routineTitle" style="margin-top:0">
+Pecho + Tríceps
+</h2>
 
-    <div class="logo">NUTRICIÓN</div>
-    <h1>Tus <span>Comidas</span></h1>
+<div id="exerciseList"></div>
 
-    <div class="grid">
+<button class="primary finish" onclick="terminarEntrenamiento()">
+🔥 Terminar entrenamiento
+</button>
 
-      <div class="stat">
-        <span>Proteína</span>
-        <strong class="green">0 g</strong>
-      </div>
+</div>
 
-      <div class="stat">
-        <span>Calorías</span>
-        <strong>0</strong>
-      </div>
+<div class="card timer">
 
-    </div>
+<div class="label">DESCANSO</div>
 
-    <div class="card">
+<div class="timer-display" id="timer">
+01:30
+</div>
 
-      <div class="exercise">
-        <div>
-          <b>🍳 Desayuno</b>
-          <span>Agrega tu comida</span>
-        </div>
-        <button onclick="alert('Próximamente: agregar comida')">+</button>
-      </div>
+<div class="timer-buttons">
+<button onclick="setTimer(60)">60s</button>
+<button onclick="setTimer(90)">90s</button>
+<button onclick="setTimer(120)">120s</button>
+</div>
 
-      <div class="exercise">
-        <div>
-          <b>🍗 Comida</b>
-          <span>Agrega tu comida</span>
-        </div>
-        <button onclick="alert('Próximamente: agregar comida')">+</button>
-      </div>
+<div class="buttons">
+<button class="primary" onclick="startTimer()">▶ Iniciar</button>
+<button onclick="resetTimer()">↻ Reiniciar</button>
+</div>
 
-      <div class="exercise">
-        <div>
-          <b>🥗 Cena</b>
-          <span>Agrega tu comida</span>
-        </div>
-        <button onclick="alert('Próximamente: agregar comida')">+</button>
-      </div>
+</div>
 
-    </div>
-
-  </section>
+</section>
 
 
-  <!-- PROGRESO -->
-  <section id="progreso" class="screen">
+<!-- ================= COMIDAS ================= -->
 
-    <div class="logo">EVOLUCIÓN</div>
-    <h1>Mi <span>Progreso</span></h1>
+<section id="comidas" class="screen">
 
-    <div class="card">
+<div class="logo">NUTRICIÓN</div>
+<h1>Tus <span>Comidas</span></h1>
 
-      <div class="label">Actualizar peso</div>
+<div class="grid">
 
-      <input
-        id="nuevoPeso"
-        type="number"
-        step="0.1"
-        placeholder="Ej. 74.5"
-        style="
-          width:100%;
-          padding:15px;
-          border-radius:12px;
-          border:1px solid #333;
-          background:#0b0d10;
-          color:white;
-          font-size:18px;
-          margin:10px 0;
-        "
-      >
+<div class="stat">
+<span>Proteína</span>
+<strong class="green">
+<span id="totalProtein">0</span> g
+</strong>
+</div>
 
-      <button class="primary" style="width:100%" onclick="guardarPeso()">
-        Guardar peso
-      </button>
+<div class="stat">
+<span>Calorías</span>
+<strong>
+<span id="totalCalories">0</span>
+</strong>
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
-      <div class="label">Objetivo</div>
-      <h2 style="margin-top:5px">
-        Definición + músculo
-      </h2>
-      <p style="color:#888;margin-top:8px">
-        Aquí vamos a ir construyendo tu historial.
-      </p>
-    </div>
+<div class="card">
 
-  </section>
+<div class="label">Agregar alimento</div>
+
+<div class="food-item">
+
+<input id="foodName" placeholder="Alimento">
+
+<input id="foodProtein" type="number" placeholder="Prot">
+
+<input id="foodCalories" type="number" placeholder="Kcal">
+
+<button class="primary" onclick="agregarComida()">+</button>
+
+</div>
+
+<p class="small-note">
+Ejemplo: pollo / 45 g proteína / 250 kcal
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="label">Hoy</div>
+
+<div id="foodList"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PROGRESO ================= -->
+
+<section id="progreso" class="screen">
+
+<div class="logo">EVOLUCIÓN</div>
+<h1>Mi <span>Progreso</span></h1>
+
+<div class="card">
+
+<div class="label">Actualizar peso</div>
+
+<input
+id="nuevoPeso"
+type="number"
+step="0.1"
+placeholder="Ej. 74.5"
+>
+
+<button
+class="primary"
+style="width:100%;margin-top:10px"
+onclick="guardarPeso()"
+>
+Guardar peso
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="label">Objetivo</div>
+
+<h2 style="margin-top:5px">
+Definición + músculo
+</h2>
+
+<p style="color:#888;margin-top:8px">
+Vamos registrando tu evolución.
+</p>
+
+<div class="label" style="margin-top:20px">
+Meta de peso
+</div>
+
+<input
+id="metaPeso"
+type="number"
+step="0.1"
+placeholder="Ej. 72"
+onchange="guardarMeta()"
+>
+
+<div class="progress-bar">
+<div id="progressFill" class="progress-fill"></div>
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="label">Historial de peso</div>
+
+<div id="weightHistory" class="history"></div>
+
+</div>
+
+</section>
 
 </div>
 
 
-<!-- NAVEGACIÓN -->
+<!-- ================= NAV ================= -->
 
 <nav class="bottom">
 
-  <button class="active" onclick="ir('inicio', this)">
-    🏠<br>Inicio
-  </button>
+<button
+class="active"
+onclick="ir('inicio',this)"
+>
+🏠<br>Inicio
+</button>
 
-  <button onclick="ir('rutina', this)">
-    🏋️<br>Rutina
-  </button>
+<button
+onclick="ir('rutina',this)"
+>
+🏋️<br>Rutina
+</button>
 
-  <button onclick="ir('comidas', this)">
-    🍗<br>Comidas
-  </button>
+<button
+onclick="ir('comidas',this)"
+>
+🍗<br>Comidas
+</button>
 
-  <button onclick="ir('progreso', this)">
-    📈<br>Progreso
-  </button>
+<button
+onclick="ir('progreso',this)"
+>
+📈<br>Progreso
+</button>
 
 </nav>
 
 
 <script>
 
-function ir(id, boton) {
+/* ================= DATOS ================= */
 
-  document.querySelectorAll('.screen')
-    .forEach(s => s.classList.remove('active'));
+const rutinas = {
 
-  document.getElementById(id)
-    .classList.add('active');
+lunes:{
+titulo:"💪 Pecho + Tríceps",
+ejercicios:[
+["Press banca","4 series × 8-10 reps"],
+["Press inclinado","3 series × 8-10 reps"],
+["Aperturas","3 series × 12 reps"],
+["Fondos","3 series × 8-12 reps"],
+["Tríceps en polea","3 series × 12 reps"]
+]
+},
 
-  document.querySelectorAll('.bottom button')
-    .forEach(b => b.classList.remove('active'));
+martes:{
+titulo:"🦍 Espalda + Bíceps",
+ejercicios:[
+["Jalón al pecho","4 series × 8-10 reps"],
+["Remo sentado","3 series × 10 reps"],
+["Remo con barra","3 series × 8-10 reps"],
+["Curl con barra","3 series × 10 reps"],
+["Curl martillo","3 series × 12 reps"]
+]
+},
 
-  if (boton) {
-    boton.classList.add('active');
-  }
+miercoles:{
+titulo:"🦵 Pierna",
+ejercicios:[
+["Sentadilla","4 series × 8-10 reps"],
+["Prensa","3 series × 10 reps"],
+["Extensión de pierna","3 series × 12 reps"],
+["Curl femoral","3 series × 12 reps"],
+["Pantorrilla","4 series × 15 reps"]
+]
+},
+
+jueves:{
+titulo:"🗿 Hombro + Brazos",
+ejercicios:[
+["Press militar","4 series × 8-10 reps"],
+["Elevaciones laterales","3 series × 12 reps"],
+["Face pulls","3 series × 15 reps"],
+["Curl bíceps","3 series × 10 reps"],
+["Tríceps cuerda","3 series × 12 reps"]
+]
+},
+
+viernes:{
+titulo:"🔥 Full Body",
+ejercicios:[
+["Press banca","3 series × 8-10 reps"],
+["Jalón al pecho","3 series × 10 reps"],
+["Prensa","3 series × 10 reps"],
+["Press hombro","3 series × 10 reps"],
+["Curl + tríceps","3 series × 12 reps"]
+]
+}
+
+};
+
+let diaActual="lunes";
+
+
+/* ================= NAVEGACIÓN ================= */
+
+function ir(id,boton){
+
+document.querySelectorAll(".screen")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+document.querySelectorAll(".bottom button")
+.forEach(b=>b.classList.remove("active"));
+
+if(boton){
+
+boton.classList.add("active");
+
+}else{
+
+const nav={
+inicio:0,
+rutina:1,
+comidas:2,
+progreso:3
+};
+
+document
+.querySelectorAll(".bottom button")
+[nav[id]]
+.classList.add("active");
+
+}
+
+if(id==="rutina"){
+renderRutina();
+}
+
+if(id==="comidas"){
+renderComidas();
+}
+
+if(id==="progreso"){
+renderProgreso();
+}
+
 }
 
 
-function terminar(boton) {
+/* ================= RUTINAS ================= */
 
-  boton.classList.toggle('done');
+function cambiarDia(dia,boton){
 
-  if (boton.classList.contains('done')) {
+diaActual=dia;
 
-    let entrenos =
-      Number(localStorage.getItem('entrenos') || 0);
+document.querySelectorAll(".day")
+.forEach(b=>b.classList.remove("active"));
 
-    localStorage.setItem(
-      'entrenos',
-      entrenos + 1
-    );
+boton.classList.add("active");
 
-    actualizar();
-
-  }
-}
-
-
-function guardarPeso() {
-
-  const input =
-    document.getElementById('nuevoPeso');
-
-  if (!input.value) return;
-
-  localStorage.setItem(
-    'peso',
-    input.value
-  );
-
-  actualizar();
-
-  input.value = '';
-
-  alert('Peso guardado 💪');
-}
-
-
-function actualizar() {
-
-  const peso =
-    localStorage.getItem('peso') || '75.0';
-
-  const entrenos =
-    localStorage.getItem('entrenos') || '0';
-
-  document.getElementById('peso')
-    .textContent = peso;
-
-  document.getElementById('entrenos')
-    .textContent = entrenos;
+renderRutina();
 
 }
 
+function renderRutina(){
 
-actualizar();
+const rutina=rutinas[diaActual];
+
+document.getElementById("routineTitle")
+.textContent=rutina.titulo;
+
+const container=document.getElementById("exerciseList");
+
+container.innerHTML="";
+
+rutina.ejercicios.forEach((ejercicio,index)=>{
+
+let html=`
+
+<div class="exercise">
+
+<div class="exercise-title">
+
+<div>
+<b>${ejercicio[0]}</b>
+<div class="target">${ejercicio[1]}</div>
+</div>
+
+</div>
+
+<div class="sets">
+
+`;
+
+for(let i=1;i<=4;i++){
+
+const key=`${diaActual}_${index}_${i}`;
+
+const saved=JSON.parse(
+localStorage.getItem("set_"+key)||"{}"
+);
+
+const done=saved.done?"done":"";
+
+html+=`
+
+<div class="set">
+
+<div class="set-number">
+S${i}
+</div>
+
+<input
+type="number"
+step="0.5"
+placeholder="kg"
+value="${saved.kg||""}"
+onchange="guardarSet('${key}','kg',this.value)"
+>
+
+<input
+type="number"
+placeholder="reps"
+value="${saved.reps||""}"
+onchange="guardarSet('${key}','reps',this.value)"
+>
+
+<button
+class="check ${done}"
+onclick="completarSet(this,'${key}')"
+>
+✓
+</button>
+
+</div>
+
+`;
+
+}
+
+html+=`
+
+</div>
+</div>
+
+`;
+
+container.innerHTML+=html;
+
+});
+
+}
+
+
+/* ================= SERIES ================= */
+
+function guardarSet(key,campo,valor){
+
+const data=JSON.parse(
+localStorage.getItem("set_"+key)||"{}"
+);
+
+data[campo]=valor;
+
+localStorage.setItem(
+"set_"+key,
+JSON.stringify(data)
+);
+
+}
+
+function completarSet(boton,key){
+
+const data=JSON.parse(
+localStorage.getItem("set_"+key)||"{}"
+);
+
+data.done=!data.done;
+
+localStorage.setItem(
+"set_"+key,
+JSON.stringify(data)
+);
+
+boton.classList.toggle("done");
+
+if(data.done){
+setTimer(90);
+startTimer();
+}
+
+}
+
+
+/* ================= TERMINAR ENTRENAMIENTO ================= */
+
+function terminarEntrenamiento(){
+
+const hoy=new Date()
+.toISOString()
+.slice(0,10);
+
+const entrenamientos=JSON.parse(
+localStorage.getItem("trainingDays")||"[]"
+);
+
+if(!entrenamientos.includes(hoy)){
+
+entrenamientos.push(hoy);
+
+localStorage.setItem(
+"trainingDays",
+JSON.stringify(entrenamientos)
+);
+
+}
+
+actualizarInicio();
+
+alert("🔥 Entrenamiento terminado. Buen trabajo.");
+
+}
+
+
+/* ================= TIMER ================= */
+
+let timerSeconds=90;
+let timerInterval=null;
+
+function setTimer(seconds){
+
+timerSeconds=seconds;
+
+actualizarTimer();
+
+}
+
+function actualizarTimer(){
+
+const min=Math.floor(timerSeconds/60)
+.toString()
+.padStart(2,"0");
+
+const sec=(timerSeconds%60)
+.toString()
+.padStart(2,"0");
+
+document.getElementById("timer")
+.textContent=`${min}:${sec}`;
+
+}
+
+function startTimer(){
+
+if(timerInterval) return;
+
+timerInterval=setInterval(()=>{
+
+if(timerSeconds<=0){
+
+clearInterval(timerInterval);
+timerInterval=null;
+
+if(navigator.vibrate){
+navigator.vibrate([300,100,300]);
+}
+
+alert("🔥 ¡A darle otra serie!");
+
+return;
+
+}
+
+timerSeconds--;
+
+actualizarTimer();
+
+},1000);
+
+}
+
+function resetTimer(){
+
+clearInterval(timerInterval);
+timerInterval=null;
+
+timerSeconds=90;
+
+actualizarTimer();
+
+}
+
+
+/* ================= PESO ================= */
+
+function guardarPeso(){
+
+const input=document.getElementById("nuevoPeso");
+
+const peso=parseFloat(input.value);
+
+if(!peso) return;
+
+localStorage.setItem(
+"peso",
+peso.toFixed(1)
+);
+
+const historial=JSON.parse(
+localStorage.getItem("weightHistory")||"[]"
+);
+
+const fecha=new Date()
+.toLocaleDateString("es-MX");
+
+historial.push({
+fecha:fecha,
+peso:peso
+});
+
+localStorage.setItem(
+"weightHistory",
+JSON.stringify(historial)
+);
+
+input.value="";
+
+actualizarInicio();
+renderProgreso();
+
+alert("💪 Peso guardado");
+
+}
+
+function guardarMeta(){
+
+const meta=
+parseFloat(
+document.getElementById("metaPeso").value
+);
+
+if(meta){
+localStorage.setItem("metaPeso",meta);
+}
+
+renderProgreso();
+
+}
+
+
+/* ================= COMIDAS ================= */
+
+function agregarComida(){
+
+const nombre=
+document.getElementById("foodName").value.trim();
+
+const protein=
+parseFloat(
+document.getElementById("foodProtein").value
+)||0;
+
+const calories=
+parseFloat(
+document.getElementById("foodCalories").value
+)||0;
+
+if(!nombre) return;
+
+const comidas=JSON.parse(
+localStorage.getItem("comidas")||"[]"
+);
+
+comidas.push({
+nombre:nombre,
+protein:protein,
+calories:calories
+});
+
+localStorage.setItem(
+"comidas",
+JSON.stringify(comidas)
+);
+
+document.getElementById("foodName").value="";
+document.getElementById("foodProtein").value="";
+document.getElementById("foodCalories").value="";
+
+renderComidas();
+
+}
+
+function eliminarComida(index){
+
+const comidas=JSON.parse(
+localStorage.getItem("comidas")||"[]"
+);
+
+comidas.splice(index,1);
+
+localStorage.setItem(
+"comidas",
+JSON.stringify(comidas)
+);
+
+renderComidas();
+
+}
+
+function renderComidas(){
+
+const comidas=JSON.parse(
+localStorage.getItem("comidas")||"[]"
+);
+
+let protein=0;
+let calories=0;
+
+const container=
+document.getElementById("foodList");
+
+container.innerHTML="";
+
+if(comidas.length===0){
+
+container.innerHTML=
+`<div class="empty">Todavía no has agregado comida.</div>`;
+
+}else{
+
+comidas.forEach((food,index)=>{
+
+protein+=Number(food.protein);
+calories+=Number(food.calories);
+
+container.innerHTML+=`
+
+<div class="food-item">
+
+<div class="food-name">
+${food.nombre}
+</div>
+
+<div class="food-info">
+${food.protein}g
+</div>
+
+<div class="food-info">
+${food.calories}
+</div>
+
+<button
+onclick="eliminarComida(${index})"
+>
+×
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+document.getElementById("totalProtein")
+.textContent=Math.round(protein);
+
+document.getElementById("totalCalories")
+.textContent=Math.round(calories);
+
+}
+
+
+/* ================= PROGRESO ================= */
+
+function renderProgreso(){
+
+const historial=JSON.parse(
+localStorage.getItem("weightHistory")||"[]"
+);
+
+const meta=
+localStorage.getItem("metaPeso")||"";
+
+document.getElementById("metaPeso")
+.value=meta;
+
+const container=
+document.getElementById("weightHistory");
+
+container.innerHTML="";
+
+if(historial.length===0){
+
+container.innerHTML=
+`<div class="empty">
+Todavía no hay registros.
+</div>`;
+
+}else{
+
+historial
+.slice()
+.reverse()
+.forEach(item=>{
+
+container.innerHTML+=`
+
+<div class="history-item">
+
+<span>${item.fecha}</span>
+
+<strong>${item.peso} kg</strong>
+
+</div>
+
+`;
+
+});
+
+}
+
+const peso=
+parseFloat(
+localStorage.getItem("peso")||75
+);
+
+if(meta){
+
+const objetivo=parseFloat(meta);
+
+let porcentaje;
+
+if(peso>objetivo){
+
+porcentaje=
+Math.max(
+0,
+Math.min(
+100,
+((75-peso)/(75-objetivo))*100
+)
+);
+
+}else{
+
+porcentaje=100;
+
+}
+
+document.getElementById("progressFill")
+.style.width=porcentaje+"%";
+
+}
+
+}
+
+
+/* ================= INICIO ================= */
+
+function actualizarInicio(){
+
+const peso=
+localStorage.getItem("peso")||"75.0";
+
+document.getElementById("peso")
+.textContent=peso;
+
+const entrenamientos=JSON.parse(
+localStorage.getItem("trainingDays")||"[]"
+);
+
+document.getElementById("entrenos")
+.textContent=entrenamientos.length;
+
+document.getElementById("racha")
+.textContent=calcularRacha();
+
+const hoy=new Date()
+.getDay();
+
+const dias=[
+"domingo",
+"lunes",
+"martes",
+"miercoles",
+"jueves",
+"viernes",
+"sabado"
+];
+
+const dia=dias[hoy];
+
+const rutina=rutinas[dia]||rutinas.lunes;
+
+document.getElementById("homeWorkout")
+.textContent=rutina.titulo;
+
+document.getElementById("homeExercises")
+.innerHTML=rutina.ejercicios
+.map(x=>x[0])
+.join("<br>");
+
+}
+
+function calcularRacha(){
+
+const dias=JSON.parse(
+localStorage.getItem("trainingDays")||"[]"
+);
+
+if(dias.length===0) return 0;
+
+let racha=0;
+
+let fecha=new Date();
+
+while(true){
+
+const key=fecha
+.toISOString()
+.slice(0,10);
+
+if(dias.includes(key)){
+
+racha++;
+
+fecha.setDate(
+fecha.getDate()-1
+);
+
+}else{
+
+break;
+
+}
+
+}
+
+return racha;
+
+}
+
+
+/* ================= INICIAR ================= */
+
+actualizarInicio();
+renderRutina();
+renderComidas();
+renderProgreso();
+actualizarTimer();
 
 </script>
 
